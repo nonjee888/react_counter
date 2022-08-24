@@ -28,7 +28,7 @@ const counter = (state = initialState, action) => {
     switch (action.type) {
         case ADD_NUMBER:
             return{
-                number: state.number + action.payload,
+                number: state.number + action.payload, //number add
             }
 
         case MINUS_NUMBER:

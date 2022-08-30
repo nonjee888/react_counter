@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNumber, minusNumber } from './redux/modules/counter';
+import { addNumber, minusNumber, __addNumber } from './redux/modules/counter';
 
 
 const App = () => {
@@ -14,8 +14,10 @@ const App = () => {
     setNumber(+value);
   }
 
+  // thunk함수를 디스패치한다. payload는 thunk함수에 넣어주면,
+  // 리덕스 모듈에서 args로 받을 수 있다.
   const onClickAddNumberHandler = () => {
-    dispatch(addNumber(number));
+    dispatch(__addNumber(number));
   };
 
   const onClickMinusNumberHandler = () => {

@@ -1,43 +1,38 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
+export const __addNumber = createAsyncThunk(
+    "ADD_NUMBER", //첫번째 인자: active value
+    //두번째 인자 : 함수
+    (args, thunkAPI) => {
+        console.log("아무거나")
+        setTimeout(() => {
+            thunkAPI.dispatch(addNumber(args));
+        }, 3000);
+    }
+);
+
 //초기 상태값
 const initialState = {
     number: 0,
 };
 
-//액션밸류
-const ADD_NUMBER = "ADD_NUMBER";
-const MINUS_NUMBER = "MINUS_NUMBER";
+export const counterSlice = createSlice({
+    name:"counter",
+    initialState,
+    reducers: {
+        addNumber: (state, action) => {
+            state.number = state.number + action.payload;
+        },
 
-//액션크리에이터
-export const addNumber = (payload) => {
-    return {
-        type: ADD_NUMBER,
-        payload,
-    };
-};
+        minusNumber: (state, action) => {
+            state.number = state.number - action.payload;
+        },
+    },
+})
 
-export const minusNumber = (payload) => {
-    return {
-        type: MINUS_NUMBER,
-        payload,
-    };
-};
 
-//리듀서
-const counter = (state = initialState, action) => {
-    // console.log(state)
-    switch (action.type) {
-        case ADD_NUMBER:
-            return{
-                number: state.number + action.payload, //number add
-            }
+export const { addNumber, minusNumber } = counterSlice.actions;
+export default counterSlice.reducer;
 
-        case MINUS_NUMBER:
-            return{
-                number: state.number - action.payload,
-            }
-        default:
-            return state;
-    }
-};
 
-export default counter;
